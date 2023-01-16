@@ -2,13 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipParent : MonoBehaviour
+public class SmallerShip : EnemyShip // INHERITANCE
 {
-    public GameObject projectilePrefab;
-
-    [SerializeField] protected int health = 100;
-    [SerializeField] protected int shield = 100;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +17,15 @@ public class ShipParent : MonoBehaviour
         
     }
 
-    public virtual int SetHealth(int health)
+    public override int SetHealth(int health) // POLYMORPHISM
     {
-        health *= 1;
+        health /= 2;
         return health;
     }
 
-    public virtual int SetShield(int shield)
+    public override int SetShield(int shield) // POLYMORPHISM
     {
-        shield *= 1;
+        shield /= 2;
         return shield;
     }
 }

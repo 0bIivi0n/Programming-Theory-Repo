@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShip : ShipParent
+public class Player : ShipParent
 {
     // Start is called before the first frame update
     void Start()
