@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShipParent : MonoBehaviour
 {
     public GameObject projectilePrefab;
+    public GameObject missilePrefab;
 
     [SerializeField] protected int health = 100;
     [SerializeField] protected int shield = 100;
@@ -12,8 +13,8 @@ public class ShipParent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = SetHealth(health);
-        shield = SetShield(shield);
+        // ABSTRACTION
+        InitializeShip();
     }
 
     // Update is called once per frame
@@ -22,15 +23,21 @@ public class ShipParent : MonoBehaviour
         
     }
 
-    public virtual int SetHealth(int health)
+    protected virtual void InitializeShip()
     {
-        health *= 1;
-        return health;
+        health = 100;
+        shield = 100;
     }
 
-    public virtual int SetShield(int shield)
+    protected void StayInBounds()
     {
-        shield *= 1;
-        return shield;
+        if(transform.position.x > 6.5)
+        {
+            transform.position = new Vector3(6.5f, transform.position.y, transform.position.z);
+        }
+        if(transform.position.x < -6.5)
+        {
+            transform.position = new Vector3(-6.5f, transform.position.y, transform.position.z);
+        }
     }
 }

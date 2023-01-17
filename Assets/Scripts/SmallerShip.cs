@@ -7,25 +7,33 @@ public class SmallerShip : EnemyShip // INHERITANCE
     // Start is called before the first frame update
     void Start()
     {
-        health = SetHealth(health);
-        shield = SetShield(shield);
+        InitializeShip();
+        InvokeRepeating("FireLaser", 2.0f, 7.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.LookAt(player.transform);
+        MoveForward();
+        StayInBounds();
+        CheckHealth();
     }
 
-    public override int SetHealth(int health) // POLYMORPHISM
+   protected override void InitializeShip()
     {
-        health /= 2;
-        return health;
+        // POLYMORPHISM
+        health = 50;
+        shield = 50;
+        speed = 1.5f;
     }
 
-    public override int SetShield(int shield) // POLYMORPHISM
+    void OnTriggerEnter(Collider other)
     {
-        shield /= 2;
-        return shield;
+        if(other.CompareTag("Projectile"))
+        {
+            health -= 5;
+            Destroy(other);
+        }
     }
 }
