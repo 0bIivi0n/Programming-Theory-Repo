@@ -31,6 +31,13 @@ public class Player : ShipParent
         
     }
 
+    protected override void InitializeShip()
+    {
+        health = 100;
+        shield = 100;
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
+
     void MovePlayer()
     {
         // Basic moves
