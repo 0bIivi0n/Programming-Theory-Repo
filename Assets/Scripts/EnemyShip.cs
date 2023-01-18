@@ -7,9 +7,13 @@ public class EnemyShip : ShipParent
     public GameObject laserPrefab;
     public GameObject player;
     protected float speed = 1.0f;
+    protected Rigidbody enemyRb;
 
     void Start()
     {
+        InitializeShip();
+        enemyRb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
         InvokeRepeating("FireLaser", 2.0f, 10.0f);
     }
 
@@ -20,7 +24,6 @@ public class EnemyShip : ShipParent
         MoveForward();
         StayInBounds();
         CheckHealth();
-        
     }
 
     protected void MoveForward()
@@ -28,6 +31,16 @@ public class EnemyShip : ShipParent
         if(transform.position.z > -13)
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+
+        if(transform.position.y > 2)
+        {
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
+        }
+
+        if(transform.position.y < 2)
+        {
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
         }
     }
 
@@ -41,15 +54,12 @@ public class EnemyShip : ShipParent
         if(other.CompareTag("Projectile"))
         {
             health -= 5;
-            Destroy(other);
-        }
-    }
-
-    protected void CheckHealth()
-    {
-        if(health <= 0)
+            Destroy(other.gameObject);
+        } 
+        else if(other.CompareTag("Missile"))
         {
-            Destroy(gameObject);
+            health -= 50;
+            Destroy(other.gameObject);
         }
     }
 }

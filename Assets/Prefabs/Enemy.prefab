@@ -28,15 +28,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7044841217790705375}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0, z: 20}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 20}
   m_LocalScale: {x: 1, y: 0.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2231910273514430843}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &7044841217790705347
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -114,10 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8695121578959080089, guid: 26716aed3052b2649be9219e85bba340, type: 3}
   missilePrefab: {fileID: 4906127471824781193, guid: aa94784d67e2df54b9c1c073b1a8fa8a, type: 3}
+  explosionParticle: {fileID: 0}
   health: 100
   shield: 100
   laserPrefab: {fileID: 6195953009481213151, guid: efc1c7ac5bc35584a931d5224cc7e687, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 304335121335334498, guid: 8ae4131cbf604574ba5256192dc428a7, type: 3}
 --- !u!54 &1023356031055923201
 Rigidbody:
   m_ObjectHideFlags: 0

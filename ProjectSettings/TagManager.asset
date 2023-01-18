@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Projectile
+  - FxTemporaire
+  - Laser
+  - Missile
   layers:
   - Default
   - TransparentFX

@@ -23,6 +23,12 @@ public class Player : ShipParent
         ResetMissile();
         MovePlayer();
         StayInBounds();
+
+        if(health <= 0)
+        {
+            health = 0;
+            Debug.Log("Game Over!");
+        }
     }
 
     void MovePlayer()
@@ -47,7 +53,7 @@ public class Player : ShipParent
 
     private void FireCanon()
     {
-        if(Input.GetButton("Fire2") && Time.time - canonTimeStamp > 0.1f)
+        if(Input.GetButton("Fire2") && Time.time - canonTimeStamp > 0.15f)
         {
             Instantiate(projectilePrefab, new Vector3(transform.position.x + 0.22f, transform.position.y + 0.05f, transform.position.z + 1.0f), transform.rotation);
             Instantiate(projectilePrefab, new Vector3(transform.position.x - 0.22f, transform.position.y + 0.05f, transform.position.z + 1.0f), transform.rotation);
@@ -69,5 +75,15 @@ public class Player : ShipParent
         yield return new WaitForSeconds(10);
         Instantiate(missilePrefab, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), missilePrefab.transform.rotation);
         canFire = true;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Laser"))
+        {
+            health -= 10;
+            Debug.Log("Touch");
+            Destroy(other.gameObject);
+        }
     }
 }
