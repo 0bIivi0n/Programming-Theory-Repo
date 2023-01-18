@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     public string playerName;
     private string bestPlayerName = "ObiWan";
     
+    private void Awake()
+    {
+        LoadBestScore();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -77,8 +81,9 @@ public class GameManager : MonoBehaviour
             bestScore = score;
             bestPlayerName = playerName;
         }
-        
+
         bestScoreText.text = "Best Score: \n" + bestPlayerName + ": " + bestScore;
+        SaveBestScore();
     }
 
     public void StartGame()
@@ -116,4 +121,38 @@ public class GameManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public void SaveBestScore()
+    {
+        SaveData data = new SaveData();
+
+        data.HighScore = bestScore;
+        data.BestPlayer = bestPlayerName;
+
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
+
+    public void LoadBestScore()
+    {
+        string path = Application.persistentDataPath + "/savefile.json";
+
+        if(File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+            bestPlayerName = data.BestPlayer;
+            bestScore = data.HighScore;
+        }
+    }
+
+    [System.Serializable]
+    class SaveData
+    {
+        public int HighScore;
+        public string BestPlayer;
+    }
 }
+
+
