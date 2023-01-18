@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8695121578959080089, guid: 26716aed3052b2649be9219e85bba340, type: 3}
   missilePrefab: {fileID: 4906127471824781193, guid: aa94784d67e2df54b9c1c073b1a8fa8a, type: 3}
-  explosionParticle: {fileID: 0}
+  gameManager: {fileID: 0}
   health: 100
   shield: 100
   laserPrefab: {fileID: 6195953009481213151, guid: efc1c7ac5bc35584a931d5224cc7e687, type: 3}
@@ -114,7 +114,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5386971758380306742}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0

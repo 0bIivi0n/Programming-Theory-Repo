@@ -8,10 +8,12 @@ public class Missile : MonoBehaviour
     private float speed;
     private float ascensionSpeed;
     private float horizontalInput;
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         isFired = false;
         speed = 5.0f;
         ascensionSpeed = 0.1f;
@@ -21,17 +23,19 @@ public class Missile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        MoveMissile();
-
-        if(Input.GetButtonDown("Fire1"))
+        if(gameManager.isGameActive)
         {
-            isFired = true;
-        }
+            MoveMissile();
 
-        FireMissile();
-        DestroyMissile();
-        StayInBounds();
+            if(Input.GetButtonDown("Fire1"))
+            {
+                isFired = true;
+            }
+
+            FireMissile();
+            DestroyMissile();
+            StayInBounds();
+        }
     }
 
     private void MoveMissile()

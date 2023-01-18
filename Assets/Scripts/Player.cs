@@ -12,6 +12,8 @@ public class Player : ShipParent
     // Start is called before the first frame update
     void Start()
     {
+        
+        InitializeShip();
         canonTimeStamp = Time.time;
         Instantiate(missilePrefab, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), missilePrefab.transform.rotation);
     }
@@ -19,16 +21,14 @@ public class Player : ShipParent
     // Update is called once per frame
     void Update()
     {
-        FireCanon();
-        ResetMissile();
-        MovePlayer();
-        StayInBounds();
-
-        if(health <= 0)
+        if(gameManager.isGameActive)
         {
-            health = 0;
-            Debug.Log("Game Over!");
+            FireCanon();
+            ResetMissile();
+            MovePlayer();
+            StayInBounds();
         }
+        
     }
 
     void MovePlayer()

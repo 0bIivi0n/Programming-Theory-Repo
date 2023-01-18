@@ -19,6 +19,7 @@ public class BiggerShip : EnemyShip // INHERITANCE
         MoveForward();
         StayInBounds();
         CheckHealth();
+        CheckGameOver();
     }
 
   protected override void InitializeShip()

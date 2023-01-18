@@ -6,7 +6,7 @@ public class ShipParent : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public GameObject missilePrefab;
-    protected GameManager gameManager;
+    public GameManager gameManager;
 
     [SerializeField] public int health;
     [SerializeField] public int shield;

@@ -7,12 +7,10 @@ public class EnemyShip : ShipParent
     public GameObject laserPrefab;
     public GameObject player;
     protected float speed = 1.0f;
-    protected Rigidbody enemyRb;
 
     void Start()
     {
         InitializeShip();
-        enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
         InvokeRepeating("FireLaser", 2.0f, 10.0f);
     }
@@ -24,6 +22,7 @@ public class EnemyShip : ShipParent
         MoveForward();
         StayInBounds();
         CheckHealth();
+        CheckGameOver();
     }
 
     protected void MoveForward()
@@ -60,6 +59,14 @@ public class EnemyShip : ShipParent
         {
             health -= 50;
             Destroy(other.gameObject);
+        }
+    }
+
+    protected void CheckGameOver()
+    {
+        if(gameManager.isGameActive == false)
+        {
+            Destroy(gameObject);
         }
     }
 }
