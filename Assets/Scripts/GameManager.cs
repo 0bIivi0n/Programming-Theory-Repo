@@ -10,18 +10,22 @@ public class GameManager : MonoBehaviour
 {
     public GameObject inGameUI;
     public GameObject startMenu;
-    public GameObject gameOver;
+    [SerializeField] TMP_InputField playerNameInput;
     public Button startButton;
     public Button exitButton;
+    public GameObject gameOver;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI bestScoreText;
     public Player player;
     public bool isGameActive = false;
     private GameObject fireParticle;
     
-    
-    
     private int score = 0;
+    private int bestScore = 500;
+    public string playerName;
+    private string bestPlayerName = "ObiWan";
     
 
     // Start is called before the first frame update
@@ -35,7 +39,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckPlayerName();
         UpdateHealth();
+        UpdateName();
+        UpdateBestScore();
 
           if(player.health <= 0)
             {
@@ -58,6 +65,22 @@ public class GameManager : MonoBehaviour
         healthText.text = "Health: " + player.health;
     }
 
+    public void UpdateName()
+    {
+        playerNameText.text = playerName;
+    }
+
+    public void UpdateBestScore()
+    {
+        if(score > bestScore)
+        {
+            bestScore = score;
+            bestPlayerName = playerName;
+        }
+        
+        bestScoreText.text = "Best Score: \n" + bestPlayerName + ": " + bestScore;
+    }
+
     public void StartGame()
     {
         isGameActive = true;
@@ -66,6 +89,23 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(true);
         startMenu.SetActive(false);
         gameOver.SetActive(false);
+    }
+
+    public void SetPlayerName()
+    {
+        playerName = playerNameInput.text;
+    }
+
+    void CheckPlayerName()
+    {
+        if(playerNameInput.text != "")
+        {
+            startButton.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            startButton.GetComponent<Button>().interactable = false;
+        }
     }
 
     public void ExitGame()
