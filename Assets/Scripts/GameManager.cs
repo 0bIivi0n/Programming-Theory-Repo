@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
             bestPlayerName = playerName;
         }
 
-        bestScoreText.text = "Best Score: \n" + bestPlayerName + ": " + bestScore;
+        bestScoreText.text = "Best Score \n" + bestPlayerName + ": " + bestScore;
         SaveBestScore();
     }
 

@@ -11,7 +11,7 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        InvokeRepeating("SpawnRandEnemy", 3.0f, 6.0f);
+        InvokeRepeating("SpawnRandEnemy", 3.0f, 3.0f);
     }
 
     private void SpawnRandEnemy()

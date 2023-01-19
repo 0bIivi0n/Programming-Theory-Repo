@@ -7,6 +7,7 @@ public class Player : ShipParent
     private float canonTimeStamp;
     private float speed = 5.0f;
     private float horizontalInput;
+    private float verticalInput;
     private bool canFire = true;
 
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class Player : ShipParent
             ResetMissile();
             MovePlayer();
             StayInBounds();
+            StayInBoundsZ();
         }
         
     }
@@ -43,6 +45,9 @@ public class Player : ShipParent
         // Basic moves
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed, Space.World);
+
+        verticalInput = Input.GetAxis("Vertical");
+        transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed, Space.World);
         
         if(horizontalInput > 0)
         {
@@ -91,6 +96,14 @@ public class Player : ShipParent
             health -= 10;
             Debug.Log("Touch");
             Destroy(other.gameObject);
+        }
+    }
+
+    void StayInBoundsZ()
+    {
+        if(transform.position.z <= -20)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -20.0f);
         }
     }
 }

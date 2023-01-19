@@ -8,6 +8,7 @@ public class Missile : MonoBehaviour
     private float speed;
     private float ascensionSpeed;
     private float horizontalInput;
+    private float verticalInput;
     public GameManager gameManager;
 
     // Start is called before the first frame update
@@ -41,10 +42,13 @@ public class Missile : MonoBehaviour
     private void MoveMissile()
     {
         horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        
 
         if(!isFired)
         {
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+            transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed, Space.World);
         }
     }
 
@@ -62,7 +66,7 @@ public class Missile : MonoBehaviour
 
     private void DestroyMissile()
     {
-        if(transform.position.z >= 25)
+        if(transform.position.z >= -5)
         {
             Destroy(gameObject);
         }
@@ -77,6 +81,14 @@ public class Missile : MonoBehaviour
         if(transform.position.x < -6.5)
         {
             transform.position = new Vector3(-6.5f, transform.position.y, transform.position.z);
+        }
+        if(transform.position.z <= -20)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -20.0f);
+        }
+        if(transform.position.z >= -5)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -5.0f);
         }
     }
 }
