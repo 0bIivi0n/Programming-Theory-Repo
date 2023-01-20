@@ -13,7 +13,6 @@ For this project, I chose to make a top-down shooter in which you control a spit
 All of this is OK.
 Now I just want to add a few extra features to make it fun to play, even though it's just an exercice. 
 
--Powerups: Like faster fire or a shockwave that deal damage to all enemies.
--Difficulty adjustments.
--Details: moving background and stuff.
+-Powerups: Faster fire or shockwave that deal damage to all enemies.
+
 -Boss Battles
