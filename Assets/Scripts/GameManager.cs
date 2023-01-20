@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEditor;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_InputField playerNameInput;
     [SerializeField] Button startButton;
     [SerializeField] Button exitButton;
+    [SerializeField] Button retryButton;
     [SerializeField] GameObject gameOver;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI healthText;
@@ -48,18 +50,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         CheckPlayerName();
-        UpdateHealth();
         UpdateName();
         UpdateBestScore();
 
-          if(player.health <= 0)
-            {
-                health = 0;
-                Debug.Log("Game Over!");
-                isGameActive = false;
-                gameOver.SetActive(true);
-                fireParticle.SetActive(true);
-            }
+        if(player.health <= 0)
+        {
+            health = 0;
+            Debug.Log("Game Over!");
+            isGameActive = false;
+            gameOver.SetActive(true);
+            fireParticle.SetActive(true);
+        }
+        UpdateHealth();
     }
 
     public void UpdateScore(int scoreToAdd)
@@ -71,6 +73,10 @@ public class GameManager : MonoBehaviour
     public void UpdateHealth()
     {
         health = player.health;
+        if(health <= 0)
+        {
+            health = 0;
+        }
         healthText.text = "Health: " + health;
     }
 
@@ -125,6 +131,11 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 
     public void SaveBestScore()
