@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ShipParent : MonoBehaviour
 {
-    public GameObject projectilePrefab;
-    public GameObject missilePrefab;
-    public GameManager gameManager;
+    [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected GameObject missilePrefab;
+    protected GameManager gameManager;
 
-    [SerializeField] public int health;
-    [SerializeField] public int shield;
+    public int health {get; protected set;}
+    public int shield {get; protected set;}
 
     // Start is called before the first frame update
     void Start()

@@ -299,7 +299,6 @@ MonoBehaviour:
   bestScoreText: {fileID: 1396369129}
   player: {fileID: 0}
   isGameActive: 0
-  playerName: 
 --- !u!4 &115455085
 Transform:
   m_ObjectHideFlags: 0
@@ -1175,7 +1174,6 @@ MonoBehaviour:
   - {fileID: 6313094457910772525, guid: 11801ffe302a560468b5562a83cd832d, type: 3}
   - {fileID: 7044841217790705375, guid: afaf68ed226718a4d95ba4a8b656e0e7, type: 3}
   - {fileID: 5386971758380306742, guid: 96ee53c524266bc41847272a6d620e94, type: 3}
-  gameManager: {fileID: 0}
 --- !u!4 &949126161
 Transform:
   m_ObjectHideFlags: 0

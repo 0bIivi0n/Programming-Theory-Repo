@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    public GameObject[] enemies;
-    public GameManager gameManager;
+    [SerializeField] GameObject[] enemies;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()

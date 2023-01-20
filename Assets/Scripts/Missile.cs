@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    public bool isFired;
+    private GameManager gameManager;
+    private GameObject player;
+
+    private bool isFired;
     private float speed;
     private float ascensionSpeed;
     private float horizontalInput;
     private float verticalInput;
-    public GameManager gameManager;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         isFired = false;
         speed = 5.0f;
@@ -41,14 +45,9 @@ public class Missile : MonoBehaviour
 
     private void MoveMissile()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        
-
         if(!isFired)
         {
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-            transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed, Space.World);
+            transform.position = new Vector3(player.transform.position.x, (player.transform.position.y - 0.1f), player.transform.position.z);
         }
     }
 
@@ -66,7 +65,7 @@ public class Missile : MonoBehaviour
 
     private void DestroyMissile()
     {
-        if(transform.position.z >= -5)
+        if(transform.position.z >= 0)
         {
             Destroy(gameObject);
         }

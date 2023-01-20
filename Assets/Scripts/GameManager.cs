@@ -8,28 +8,32 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject inGameUI;
-    public GameObject startMenu;
+    [SerializeField] GameObject inGameUI;
+    [SerializeField] GameObject startMenu;
     [SerializeField] TMP_InputField playerNameInput;
-    public Button startButton;
-    public Button exitButton;
-    public GameObject gameOver;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI playerNameText;
-    public TextMeshProUGUI bestScoreText;
-    public Player player;
-    public bool isGameActive = false;
-    private GameObject fireParticle;
+    [SerializeField] Button startButton;
+    [SerializeField] Button exitButton;
+    [SerializeField] GameObject gameOver;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI playerNameText;
+    [SerializeField] TextMeshProUGUI bestScoreText;
+    [SerializeField] Player player;
     
+    private GameObject fireParticle;
+     
+    public bool isGameActive {get; private set;}
+   
     private int score = 0;
-    private int bestScore = 500;
-    public string playerName;
-    private string bestPlayerName = "ObiWan";
+    private int bestScore = 01;
+    private string playerName;
+    private string bestPlayerName = "Zeub";
+    private int health;
     
     private void Awake()
     {
         LoadBestScore();
+        isGameActive = false;
     }
 
     // Start is called before the first frame update
@@ -50,7 +54,7 @@ public class GameManager : MonoBehaviour
 
           if(player.health <= 0)
             {
-                player.health = 0;
+                health = 0;
                 Debug.Log("Game Over!");
                 isGameActive = false;
                 gameOver.SetActive(true);
@@ -66,7 +70,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateHealth()
     {
-        healthText.text = "Health: " + player.health;
+        health = player.health;
+        healthText.text = "Health: " + health;
     }
 
     public void UpdateName()

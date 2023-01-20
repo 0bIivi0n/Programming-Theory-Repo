@@ -105,5 +105,9 @@ public class Player : ShipParent
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, -20.0f);
         }
+        if(transform.position.z >= -5)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -5.0f);
+        }
     }
 }

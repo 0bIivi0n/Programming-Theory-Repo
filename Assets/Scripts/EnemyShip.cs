@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyShip : ShipParent
 {
-    public GameObject laserPrefab;
-    public GameObject player;
+    [SerializeField] protected GameObject laserPrefab;
+    protected GameObject player;
     protected float speed = 1.0f;
 
     void Start()
