@@ -40,7 +40,7 @@ public class SmallerShip : EnemyShip // INHERITANCE
         }
         else if(other.CompareTag("Missile"))
         {
-            health -= 50;
+            health -= 100;
             Destroy(other.gameObject);
         }
     }
