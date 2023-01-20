@@ -20,7 +20,7 @@ public class Missile : MonoBehaviour
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         isFired = false;
-        speed = 5.0f;
+        speed = 7.5f;
         ascensionSpeed = 0.1f;
         
     }
@@ -39,7 +39,6 @@ public class Missile : MonoBehaviour
 
             FireMissile();
             DestroyMissile();
-            StayInBounds();
         }
     }
 
@@ -68,26 +67,6 @@ public class Missile : MonoBehaviour
         if(transform.position.z >= 0)
         {
             Destroy(gameObject);
-        }
-    }
-
-    protected void StayInBounds()
-    {
-        if(transform.position.x > 6.5)
-        {
-            transform.position = new Vector3(6.5f, transform.position.y, transform.position.z);
-        }
-        if(transform.position.x < -6.5)
-        {
-            transform.position = new Vector3(-6.5f, transform.position.y, transform.position.z);
-        }
-        if(transform.position.z <= -20)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -20.0f);
-        }
-        if(transform.position.z >= -5)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -5.0f);
         }
     }
 }
