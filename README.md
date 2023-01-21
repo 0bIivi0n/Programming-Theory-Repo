@@ -14,7 +14,7 @@ For this project, I chose to make a top-down shooter in which you control a spit
 4/ Most of the code is separated in different functions and is easy to read //ABSTRACTION
 
 
-All of this is OK. (I guess)
+All of this is OK (I guess).
 Now I just want to add a few extra features to make it fun to play, even though it's just an exercice. 
 
 -Powerups: Faster fire or shockwave that deal damage to all enemies.
