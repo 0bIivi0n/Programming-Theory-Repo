@@ -22,7 +22,7 @@ public class EnemyShip : ShipParent
         MoveForward();
         StayInBounds();
         CheckHealth();
-        //CheckGameOver();
+        CheckGameOver();
     }
 
     protected void MoveForward()

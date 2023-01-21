@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEditor;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_InputField playerNameInput;
     [SerializeField] Button startButton;
     [SerializeField] Button exitButton;
+    [SerializeField] Button retryButton;
     [SerializeField] GameObject gameOver;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI healthText;
@@ -48,19 +50,23 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         CheckPlayerName();
-        UpdateHealth();
         UpdateName();
         UpdateBestScore();
 
-          if(player.health <= 0)
-            {
-                health = 0;
-                Debug.Log("Game Over!");
-                isGameActive = false;
-                gameOver.SetActive(true);
-                fireParticle.SetActive(true);
-            }
+        if(player.health <= 0)
+        {
+            health = 0;
+            Debug.Log("Game Over!");
+            isGameActive = false;
+            gameOver.SetActive(true);
+            fireParticle.SetActive(true);
+        }
+        UpdateHealth();
     }
+
+
+    // Functions:
+
 
     public void UpdateScore(int scoreToAdd)
     {
@@ -68,18 +74,22 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    public void UpdateHealth()
+    private void UpdateHealth()
     {
         health = player.health;
+        if(health <= 0)
+        {
+            health = 0;
+        }
         healthText.text = "Health: " + health;
     }
 
-    public void UpdateName()
+    private void UpdateName()
     {
         playerNameText.text = playerName;
     }
 
-    public void UpdateBestScore()
+    private void UpdateBestScore()
     {
         if(score > bestScore)
         {
@@ -101,12 +111,12 @@ public class GameManager : MonoBehaviour
         gameOver.SetActive(false);
     }
 
-    public void SetPlayerName()
+    private void SetPlayerName()
     {
         playerName = playerNameInput.text;
     }
 
-    void CheckPlayerName()
+    private void CheckPlayerName()
     {
         if(playerNameInput.text != "")
         {
@@ -118,16 +128,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ExitGame()
+    public void ReloadScene()
     {
-#if UNITY_EDITOR
-        EditorApplication.ExitPlaymode();
-#else
-        Application.Quit();
-#endif
+        SceneManager.LoadScene("MainScene");
     }
 
-    public void SaveBestScore()
+    private void SaveBestScore()
     {
         SaveData data = new SaveData();
 
@@ -138,7 +144,7 @@ public class GameManager : MonoBehaviour
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
-    public void LoadBestScore()
+    private void LoadBestScore()
     {
         string path = Application.persistentDataPath + "/savefile.json";
 
@@ -150,6 +156,15 @@ public class GameManager : MonoBehaviour
             bestPlayerName = data.BestPlayer;
             bestScore = data.HighScore;
         }
+    }
+
+    public void ExitGame()
+    {
+        #if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+        #else
+            Application.Quit();
+        #endif
     }
 
     [System.Serializable]

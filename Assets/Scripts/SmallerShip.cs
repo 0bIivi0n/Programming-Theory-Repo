@@ -19,7 +19,7 @@ public class SmallerShip : EnemyShip // INHERITANCE
         MoveForward();
         StayInBounds();
         CheckHealth();
-        //CheckGameOver();
+        CheckGameOver();
     }
 
    protected override void InitializeShip()
