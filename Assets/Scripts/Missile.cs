@@ -6,6 +6,7 @@ public class Missile : MonoBehaviour
 {
     private GameManager gameManager;
     private GameObject player;
+    [SerializeField] private GameObject fireParticle;
 
     private bool isFired;
     private float speed;
@@ -58,6 +59,7 @@ public class Missile : MonoBehaviour
             if(transform.position.y < 2)
             {
                 transform.Translate(Vector3.up * Time.deltaTime * ascensionSpeed);
+                fireParticle.SetActive(true);
             }
         }
     }

@@ -6,10 +6,12 @@ public class ShipParent : MonoBehaviour
 {
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected GameObject missilePrefab;
+    [SerializeField] protected GameObject bonusPrefab;
     protected GameManager gameManager;
 
-    public int health {get; protected set;}
-    public int shield {get; protected set;}
+    public int health;
+    public int shield;
+    public int value;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,8 @@ public class ShipParent : MonoBehaviour
     protected virtual void InitializeShip()
     {
         health = 200;
-        shield = 200;
+        shield = 0;
+        value = 50;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
@@ -43,12 +46,23 @@ public class ShipParent : MonoBehaviour
         }
     }
 
-    protected virtual void CheckHealth()
+    protected void CheckHealth()
     {
         if(health <= 0)
         {
+            DropBonus();
             Destroy(gameObject);
-            gameManager.UpdateScore(50);
+            gameManager.UpdateScore(value);
         }
     }
+
+    void DropBonus()
+    {
+        int rng = Random.Range(0, 100);
+            
+        if(rng >= 60 && rng <= 70)
+        {
+            Instantiate(bonusPrefab, transform.position, transform.rotation);
+        }
+    }          
 }

@@ -25,7 +25,7 @@ public class GroundScript : MonoBehaviour
             hasSpawned = true;
         }
 
-        if(transform.position.z <= -49)
+        if(transform.position.z <= -50)
         {
             Destroy(gameObject);
             hasSpawned = false;

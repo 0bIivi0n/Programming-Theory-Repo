@@ -55,7 +55,12 @@ public class SpawnEnemy : MonoBehaviour
         wave++;
         enemiesPerWave += 10;
         enemiesSpawned = 0;
-        spawnRate -= 0.25f;
+        
+        if(spawnRate > 2)
+        {
+            spawnRate -= 0.25f;
+        }
+        
         InvokeRepeating("SpawnRandEnemy", 3.0f, spawnRate);
     }
 

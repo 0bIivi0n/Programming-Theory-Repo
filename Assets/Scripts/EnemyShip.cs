@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyShip : ShipParent
 {
     [SerializeField] protected GameObject laserPrefab;
+    
     protected GameObject player;
     protected float speed = 1.0f;
 
@@ -69,4 +70,14 @@ public class EnemyShip : ShipParent
             Destroy(gameObject);
         }
     }
+
+    void DropBonus()
+    {
+        int rng = Random.Range(0, 100);
+            
+        if(rng >= 60 && rng <= 70)
+        {
+            Instantiate(bonusPrefab, transform.position, transform.rotation);
+        }
+    }     
 }

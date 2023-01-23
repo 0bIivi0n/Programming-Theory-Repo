@@ -27,6 +27,7 @@ public class BiggerShip : EnemyShip // INHERITANCE
         health = 400;
         shield = 400;
         speed = 0.5f;
+        value = 100;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
@@ -44,12 +45,13 @@ public class BiggerShip : EnemyShip // INHERITANCE
         }
     }
 
-    protected override void CheckHealth()
+    void DropBonus()
     {
-        if(health <= 0)
+        int rng = Random.Range(0, 100);
+            
+        if(rng >= 90)
         {
-            Destroy(gameObject);
-            gameManager.UpdateScore(100);
+            Instantiate(bonusPrefab, transform.position, transform.rotation);
         }
-    }
+    }     
 }

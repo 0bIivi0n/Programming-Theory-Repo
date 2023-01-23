@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button retryButton;
     [SerializeField] GameObject gameOver;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI shieldText;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI playerNameText;
     [SerializeField] TextMeshProUGUI bestScoreText;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     private string playerName;
     private string bestPlayerName = "Zeub";
     private int health;
+    private int shield;
     
     private void Awake()
     {
@@ -67,7 +69,6 @@ public class GameManager : MonoBehaviour
 
     // Functions:
 
-
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
@@ -77,11 +78,19 @@ public class GameManager : MonoBehaviour
     private void UpdateHealth()
     {
         health = player.health;
+        shield = player.shield;
+        
         if(health <= 0)
         {
             health = 0;
         }
+        if(shield <= 0)
+        {
+            shield = 0;
+        }
+
         healthText.text = "Health: " + health;
+        shieldText.text = "Shield: " + shield;
     }
 
     private void UpdateName()
