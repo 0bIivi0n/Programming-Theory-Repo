@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Player : ShipParent
 {
+    [SerializeField] GameObject playerShield;
+    [SerializeField] GameObject shockWave;
+
     private float canonTimeStamp;
     private float speed = 5.0f;
+    private float fireRate = 0.15f; 
     private float horizontalInput;
     private float verticalInput;
     private bool canFire = true;
@@ -29,6 +33,12 @@ public class Player : ShipParent
             MovePlayer();
             StayInBounds();
             StayInBoundsZ();
+
+            if(shield <= 0)
+            {
+                shield = 0;
+                playerShield.SetActive(false);
+            }
         }
         
     }
@@ -36,7 +46,7 @@ public class Player : ShipParent
     protected override void InitializeShip()
     {
         health = 100;
-        shield = 100;
+        shield = 0;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
@@ -65,7 +75,7 @@ public class Player : ShipParent
 
     private void FireCanon()
     {
-        if(Input.GetButton("Fire2") && Time.time - canonTimeStamp > 0.15f)
+        if(Input.GetButton("Fire2") && Time.time - canonTimeStamp > fireRate)
         {
             Instantiate(projectilePrefab, new Vector3(transform.position.x + 0.22f, transform.position.y + 0.05f, transform.position.z + 1.0f), transform.rotation);
             Instantiate(projectilePrefab, new Vector3(transform.position.x - 0.22f, transform.position.y + 0.05f, transform.position.z + 1.0f), transform.rotation);
@@ -93,8 +103,40 @@ public class Player : ShipParent
     {
         if(other.CompareTag("Laser"))
         {
-            health -= 10;
-            Debug.Log("Touch");
+            if(shield > 0)
+            {
+                shield -= 10;
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                health -= 10;
+                Destroy(other.gameObject);
+            }
+            
+        }
+
+        if(other.CompareTag("FireBonus"))
+        {
+            FireBonus();
+            Destroy(other.gameObject);
+        }
+
+        if(other.CompareTag("RepairBonus"))
+        {
+            RecoverHealth();
+            Destroy(other.gameObject);
+        }
+
+        if(other.CompareTag("ShieldBonus"))
+        {
+            ActivateShield();
+            Destroy(other.gameObject);
+        }
+
+        if(other.CompareTag("ThunderBonus"))
+        {
+            ActivateShockWave();
             Destroy(other.gameObject);
         }
     }
@@ -109,5 +151,63 @@ public class Player : ShipParent
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, -5.0f);
         }
+    }
+
+    void FireBonus()
+    {
+        fireRate = 0.07f;
+        StartCoroutine(StopFireBonus());
+    }
+
+    IEnumerator StopFireBonus()
+    {
+        yield return new WaitForSeconds(10);
+        fireRate = 0.15f;
+    }
+
+    void RecoverHealth()
+    {
+        if(health < 100)
+        {
+            health += 20;
+        }
+        if(health > 100)
+        {
+            health = 100;
+        }
+    }
+
+    void ActivateShield()
+    {
+        if(shield < 100)
+        {
+            shield += 20;
+            playerShield.SetActive(true);
+        }
+        if(shield > 100)
+        {
+            shield = 100;
+        }
+        
+    }
+
+    void ActivateShockWave()
+    {
+        GameObject[] enemies;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        shockWave.SetActive(true);
+        StartCoroutine(StopShockWave());
+
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<EnemyShip>().health -= 100;
+        }
+    }
+
+    IEnumerator StopShockWave()
+    {
+        yield return new WaitForSeconds(2);
+        shockWave.SetActive(false);
     }
 }

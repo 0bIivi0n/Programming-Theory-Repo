@@ -7,6 +7,7 @@ using TMPro;
 public class SpawnEnemy : MonoBehaviour
 {
     [SerializeField] GameObject[] enemies;
+    [SerializeField] GameObject bossPrefab;
     GameManager gameManager;
     [SerializeField] TextMeshProUGUI waveText;
     [SerializeField] int enemiesSpawned = 0;
@@ -14,21 +15,35 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] int enemiesPerWave = 10;
     [SerializeField] int enemiesRemaining;
     [SerializeField] float spawnRate = 4.0f;
+    private bool bossSpawned = false;
+    public float bossMultiplier {get; private set;}
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        bossMultiplier = 1.0f;
         InvokeRepeating("SpawnRandEnemy", 3.0f, 4.0f);
         
     }
 
     void Update()
     {
+        ChangeWave();
+    }
+
+    void ChangeWave()
+    {
         if(enemiesSpawned == enemiesPerWave)
         {
             CancelInvoke();
             enemiesRemaining = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+            if(enemiesRemaining == 1 && bossSpawned == false)
+            {
+                Instantiate(bossPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 5), transform.rotation);
+                bossSpawned = true;
+            }
             
             if(enemiesRemaining == 0)
             {
@@ -45,7 +60,7 @@ public class SpawnEnemy : MonoBehaviour
         {
             int index = Random.Range(0, enemies.Length);
             float randPosX = Random.Range(-8, 8);
-            Instantiate(enemies[index], new Vector3(randPosX, transform.position.y, transform.position.y), transform.rotation);
+            Instantiate(enemies[index], new Vector3(randPosX, transform.position.y, transform.position.z), transform.rotation);
             enemiesSpawned++;
         }
     }
@@ -53,9 +68,16 @@ public class SpawnEnemy : MonoBehaviour
     void StartNewWave()
     {
         wave++;
+        bossMultiplier += 0.25f;
         enemiesPerWave += 10;
         enemiesSpawned = 0;
-        spawnRate -= 0.25f;
+        bossSpawned = false;
+        
+        if(spawnRate > 2)
+        {
+            spawnRate -= 0.25f;
+        }
+        
         InvokeRepeating("SpawnRandEnemy", 3.0f, spawnRate);
     }
 

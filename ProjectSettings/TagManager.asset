@@ -9,6 +9,11 @@ TagManager:
   - FxTemporaire
   - Laser
   - Missile
+  - FireBonus
+  - ThunderBonus
+  - ShieldBonus
+  - RepairBonus
+  - Star
   layers:
   - Default
   - TransparentFX

@@ -114,11 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8695121578959080089, guid: 26716aed3052b2649be9219e85bba340, type: 3}
   missilePrefab: {fileID: 4906127471824781193, guid: aa94784d67e2df54b9c1c073b1a8fa8a, type: 3}
-  gameManager: {fileID: 0}
+  bonusPrefab: {fileID: 8177789299925954591, guid: 6a59ef918b850044eae84fd46b87e1d7, type: 3}
   health: 100
   shield: 100
+  value: 0
   laserPrefab: {fileID: 6195953009481213151, guid: efc1c7ac5bc35584a931d5224cc7e687, type: 3}
-  player: {fileID: 304335121335334498, guid: 8ae4131cbf604574ba5256192dc428a7, type: 3}
 --- !u!54 &1023356031055923201
 Rigidbody:
   m_ObjectHideFlags: 0
