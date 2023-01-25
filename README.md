@@ -14,7 +14,7 @@ For this project, I chose to make a top-down shooter in which you control a spit
 4/ Most of the code is separated in different functions and is easy to read //ABSTRACTION - Almost done!
 
 To DO:
-  -Add Music and Sound FX
+    -Add Music and Sound FX
 
 
 Looks good enough, now clean your code!
