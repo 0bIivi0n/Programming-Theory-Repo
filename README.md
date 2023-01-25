@@ -19,6 +19,6 @@ For this project, I chose to make a top-down shooter in which you control a spit
 All of this is OK (I guess).
 Now I just want to add a few extra features to make it fun to play, even though it's just an exercice. 
 
--Powerups: Faster fire or shockwave that deal damage to all enemies.
+-Better powerups: Let the player collect the powerups and trigger them when they want (instead of triggering them on pickup).
 
--Boss Battles
+-Better UI: Add a new UI Element that shows which powerup the player has available.
