@@ -9,9 +9,9 @@ public class ShipParent : MonoBehaviour
     [SerializeField] protected GameObject bonusPrefab;
     protected GameManager gameManager;
 
-    public int health;
-    public int shield;
-    public int value;
+    public float health;
+    public float shield;
+    public float value;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +46,7 @@ public class ShipParent : MonoBehaviour
         }
     }
 
-    protected void CheckHealth()
+    protected virtual void CheckHealth()
     {
         if(health <= 0)
         {

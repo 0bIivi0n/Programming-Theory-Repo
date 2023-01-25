@@ -69,16 +69,16 @@ public class GameManager : MonoBehaviour
 
     // Functions:
 
-    public void UpdateScore(int scoreToAdd)
+    public void UpdateScore(float scoreToAdd)
     {
-        score += scoreToAdd;
+        score += (int) scoreToAdd;
         scoreText.text = "Score: " + score;
     }
 
     private void UpdateHealth()
     {
-        health = player.health;
-        shield = player.shield;
+        health = (int) player.health;
+        shield = (int) player.shield;
         
         if(health <= 0)
         {

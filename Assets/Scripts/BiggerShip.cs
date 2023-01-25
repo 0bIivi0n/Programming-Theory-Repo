@@ -22,7 +22,7 @@ public class BiggerShip : EnemyShip // INHERITANCE
         CheckGameOver();
     }
 
-  protected override void InitializeShip()
+    protected override void InitializeShip()
     {
         health = 400;
         shield = 400;

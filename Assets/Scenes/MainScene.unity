@@ -1470,6 +1470,7 @@ MonoBehaviour:
   - {fileID: 6313094457910772525, guid: 11801ffe302a560468b5562a83cd832d, type: 3}
   - {fileID: 7044841217790705375, guid: afaf68ed226718a4d95ba4a8b656e0e7, type: 3}
   - {fileID: 5386971758380306742, guid: 96ee53c524266bc41847272a6d620e94, type: 3}
+  bossPrefab: {fileID: 2579118037199425970, guid: 81a785d100a329345b0109a432e3c06a, type: 3}
   waveText: {fileID: 2105814706}
   enemiesSpawned: 0
   wave: 1
@@ -1484,7 +1485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949126159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7384895, y: 1.4237025, z: 19.99646}
+  m_LocalPosition: {x: 0, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -26,7 +26,7 @@ public class EnemyShip : ShipParent
         CheckGameOver();
     }
 
-    protected void MoveForward()
+    protected virtual void MoveForward()
     {
         if(transform.position.z > -13)
         {
