@@ -16,9 +16,6 @@ For this project, I chose to make a top-down shooter in which you control a spit
 4/ Most of the code is separated in different functions and is easy to read //ABSTRACTION
 
 
-All of this is OK (I guess).
-Now I just want to add a few extra features to make it fun to play, even though it's just an exercice. 
+Looks good enough, now clean your code!
 
--Better powerups: Let the player collect the powerups and trigger them when they want (instead of triggering them on pickup).
-
--Better UI: Add a new UI Element that shows which powerup the player has available.
+Optional : Try different cameras ???
