@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireParticle: {fileID: 3696344296339404490}
+  missileIcon: {fileID: 4893558586674831708, guid: cd5821abafee739479dce43b19712e91, type: 3}
 --- !u!1001 &5398741682716344743
 PrefabInstance:
   m_ObjectHideFlags: 0

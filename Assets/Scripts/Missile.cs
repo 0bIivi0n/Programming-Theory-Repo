@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    private GameManager gameManager;
-    private GameObject player;
+    
     [SerializeField] private GameObject fireParticle;
 
+    private GameManager gameManager;
+    private GameObject player;
     private bool isFired;
     private float speed;
     private float ascensionSpeed;

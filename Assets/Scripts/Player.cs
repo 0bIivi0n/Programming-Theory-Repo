@@ -6,6 +6,9 @@ public class Player : ShipParent
 {
     [SerializeField] GameObject playerShield;
     [SerializeField] GameObject shockWave;
+    [SerializeField] GameObject missileIcon;
+    [SerializeField] GameObject fireBonusIcon;
+    [SerializeField] GameObject shockWaveIcon;
 
     private float canonTimeStamp;
     private float speed = 5.0f;
@@ -13,6 +16,8 @@ public class Player : ShipParent
     private float horizontalInput;
     private float verticalInput;
     private bool canFire = true;
+    [SerializeField] private bool hasFireBonus = false;
+    [SerializeField ]private bool hasShockWaveBonus = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +38,22 @@ public class Player : ShipParent
             MovePlayer();
             StayInBounds();
             StayInBoundsZ();
+            ShowIcons();
 
             if(shield <= 0)
             {
                 shield = 0;
                 playerShield.SetActive(false);
+            }
+
+            if(Input.GetButtonDown("FireCanonBonus") && hasFireBonus)
+            {
+                FireBonus();
+            }
+
+            if(Input.GetButtonDown("ShockwaveBonus") && hasShockWaveBonus)
+            {
+                ActivateShockWave();
             }
         }
         
@@ -99,6 +115,37 @@ public class Player : ShipParent
         canFire = true;
     }
 
+    private void ShowIcons()
+    {
+        if(canFire)
+        {
+            missileIcon.SetActive(true);
+        }
+        else
+        {
+            missileIcon.SetActive(false);
+        }
+
+        if(hasFireBonus)
+        {
+            fireBonusIcon.SetActive(true);
+        }
+        else
+        {
+            fireBonusIcon.SetActive(false);
+        }
+
+        if(hasShockWaveBonus)
+        {
+            shockWaveIcon.SetActive(true);
+        }
+        else
+        {
+            shockWaveIcon.SetActive(false);
+        }
+
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Laser"))
@@ -118,7 +165,7 @@ public class Player : ShipParent
 
         if(other.CompareTag("FireBonus"))
         {
-            FireBonus();
+            hasFireBonus = true;
             Destroy(other.gameObject);
         }
 
@@ -136,7 +183,7 @@ public class Player : ShipParent
 
         if(other.CompareTag("ThunderBonus"))
         {
-            ActivateShockWave();
+            hasShockWaveBonus = true;
             Destroy(other.gameObject);
         }
     }
@@ -157,6 +204,7 @@ public class Player : ShipParent
     {
         fireRate = 0.07f;
         StartCoroutine(StopFireBonus());
+        hasFireBonus = false;
     }
 
     IEnumerator StopFireBonus()
@@ -203,6 +251,8 @@ public class Player : ShipParent
         {
             enemy.GetComponent<EnemyShip>().health -= 100;
         }
+
+        hasShockWaveBonus = false;
     }
 
     IEnumerator StopShockWave()
