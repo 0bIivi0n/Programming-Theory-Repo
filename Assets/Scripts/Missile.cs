@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
+    
+    [SerializeField] private GameObject fireParticle;
+    private AudioSource missileAudio;
+
     private GameManager gameManager;
     private GameObject player;
-    [SerializeField] private GameObject fireParticle;
-
     private bool isFired;
     private float speed;
     private float ascensionSpeed;
@@ -18,6 +20,7 @@ public class Missile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        missileAudio = GetComponent<AudioSource>();
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         isFired = false;
@@ -33,9 +36,10 @@ public class Missile : MonoBehaviour
         {
             MoveMissile();
 
-            if(Input.GetButtonDown("Fire1"))
+            if(Input.GetButtonDown("Fire1") && !isFired)
             {
                 isFired = true;
+                missileAudio.Play();
             }
 
             FireMissile();
@@ -59,8 +63,9 @@ public class Missile : MonoBehaviour
             if(transform.position.y < 2)
             {
                 transform.Translate(Vector3.up * Time.deltaTime * ascensionSpeed);
-                fireParticle.SetActive(true);
             }
+            fireParticle.SetActive(true);
+            
         }
     }
 
