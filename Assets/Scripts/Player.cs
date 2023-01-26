@@ -9,7 +9,12 @@ public class Player : ShipParent
     [SerializeField] GameObject missileIcon;
     [SerializeField] GameObject fireBonusIcon;
     [SerializeField] GameObject shockWaveIcon;
-
+    [SerializeField] private GameObject canonAudio;
+    
+    private AudioSource repairAudio;
+    private AudioSource shieldAudio;
+    private AudioSource WeaponBonusAudio;
+    private AudioSource shockWaveSound;
     private float canonTimeStamp;
     private float speed = 5.0f;
     private float fireRate = 0.15f; 
@@ -21,9 +26,12 @@ public class Player : ShipParent
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {   
         InitializeShip();
+        repairAudio = GameObject.Find("Repair Sound").GetComponent<AudioSource>();
+        shieldAudio = GameObject.Find("Shield Up Sound").GetComponent<AudioSource>();
+        WeaponBonusAudio = GameObject.Find("Weapon Bonus Sound").GetComponent<AudioSource>();
+        shockWaveSound = GetComponent<AudioSource>();
         canonTimeStamp = Time.time;
         Instantiate(missilePrefab, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), missilePrefab.transform.rotation);
     }
@@ -57,6 +65,10 @@ public class Player : ShipParent
             }
         }
         
+        if(gameManager.isGameActive == false)
+        {
+            canonAudio.SetActive(false);
+        }
     }
 
     protected override void InitializeShip()
@@ -93,10 +105,17 @@ public class Player : ShipParent
     {
         if(Input.GetButton("Fire2") && Time.time - canonTimeStamp > fireRate)
         {
+            canonAudio.SetActive(true);
             Instantiate(projectilePrefab, new Vector3(transform.position.x + 0.22f, transform.position.y + 0.05f, transform.position.z + 1.0f), transform.rotation);
             Instantiate(projectilePrefab, new Vector3(transform.position.x - 0.22f, transform.position.y + 0.05f, transform.position.z + 1.0f), transform.rotation);
             canonTimeStamp = Time.time;
         }
+
+        if(Input.GetButtonUp("Fire2"))
+        {
+            canonAudio.SetActive(false);
+        }
+
     }
 
     private void ResetMissile()
@@ -165,24 +184,28 @@ public class Player : ShipParent
 
         if(other.CompareTag("FireBonus"))
         {
+            WeaponBonusAudio.Play();
             hasFireBonus = true;
             Destroy(other.gameObject);
         }
 
         if(other.CompareTag("RepairBonus"))
         {
+            repairAudio.Play();
             RecoverHealth();
             Destroy(other.gameObject);
         }
 
         if(other.CompareTag("ShieldBonus"))
         {
+            shieldAudio.Play();
             ActivateShield();
             Destroy(other.gameObject);
         }
 
         if(other.CompareTag("ThunderBonus"))
         {
+            WeaponBonusAudio.Play();
             hasShockWaveBonus = true;
             Destroy(other.gameObject);
         }
@@ -202,6 +225,7 @@ public class Player : ShipParent
 
     void FireBonus()
     {
+        WeaponBonusAudio.Play();
         fireRate = 0.07f;
         StartCoroutine(StopFireBonus());
         hasFireBonus = false;
@@ -244,6 +268,7 @@ public class Player : ShipParent
         GameObject[] enemies;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
+        shockWaveSound.Play();
         shockWave.SetActive(true);
         StartCoroutine(StopShockWave());
 

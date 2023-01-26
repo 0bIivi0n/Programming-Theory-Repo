@@ -17,12 +17,14 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] float spawnRate = 4.0f;
     private bool bossSpawned = false;
     public float bossMultiplier {get; private set;}
+    public float bossTurretMultiplier {get; private set;}
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         bossMultiplier = 1.0f;
+        bossTurretMultiplier = 1.0f;
         InvokeRepeating("SpawnRandEnemy", 3.0f, 4.0f);
         
     }
@@ -69,6 +71,7 @@ public class SpawnEnemy : MonoBehaviour
     {
         wave++;
         bossMultiplier += 0.25f;
+        bossTurretMultiplier += 0.1f;
         enemiesPerWave += 10;
         enemiesSpawned = 0;
         bossSpawned = false;
