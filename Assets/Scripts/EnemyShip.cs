@@ -55,6 +55,7 @@ public class EnemyShip : ShipParent
         {
             health -= 5;
             Destroy(other.gameObject);
+            
         } 
         else if(other.CompareTag("Missile"))
         {

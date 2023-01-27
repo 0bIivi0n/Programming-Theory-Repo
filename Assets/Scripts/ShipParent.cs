@@ -20,12 +20,6 @@ public class ShipParent : MonoBehaviour
         InitializeShip();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     protected virtual void InitializeShip()
     {
         health = 200;

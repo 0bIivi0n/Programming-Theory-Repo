@@ -15,9 +15,7 @@ public class BossTurret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        spawnEnemyScript = GameObject.Find("EnemySpawnPoint").GetComponent<SpawnEnemy>();
+        InitializeReferences();
 
         fireRate = 10.0f / spawnEnemyScript.bossTurretMultiplier;
         rand = Random.Range(2.0f, 5.0f);
@@ -30,7 +28,7 @@ public class BossTurret : MonoBehaviour
        FollowPlayer();
     }
 
-
+    // Functions 
     void FollowPlayer()
     {
     
@@ -45,5 +43,12 @@ public class BossTurret : MonoBehaviour
             Instantiate(laserPrefab, transform.position, transform.rotation);
         }
         
+    }
+
+    private void InitializeReferences()
+    {
+        player = GameObject.Find("Player");
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        spawnEnemyScript = GameObject.Find("EnemySpawnPoint").GetComponent<SpawnEnemy>();
     }
 }

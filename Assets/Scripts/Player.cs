@@ -15,6 +15,7 @@ public class Player : ShipParent
     private AudioSource shieldAudio;
     private AudioSource WeaponBonusAudio;
     private AudioSource shockWaveSound;
+    private AudioSource motorSound;
     private float canonTimeStamp;
     private float speed = 5.0f;
     private float fireRate = 0.15f; 
@@ -28,10 +29,8 @@ public class Player : ShipParent
     void Start()
     {   
         InitializeShip();
-        repairAudio = GameObject.Find("Repair Sound").GetComponent<AudioSource>();
-        shieldAudio = GameObject.Find("Shield Up Sound").GetComponent<AudioSource>();
-        WeaponBonusAudio = GameObject.Find("Weapon Bonus Sound").GetComponent<AudioSource>();
-        shockWaveSound = GetComponent<AudioSource>();
+        InitializeReferences();
+        
         canonTimeStamp = Time.time;
         Instantiate(missilePrefab, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), missilePrefab.transform.rotation);
     }
@@ -71,6 +70,15 @@ public class Player : ShipParent
         }
     }
 
+    private void InitializeReferences()
+    {
+        repairAudio = GameObject.Find("Repair Sound").GetComponent<AudioSource>();
+        shieldAudio = GameObject.Find("Shield Up Sound").GetComponent<AudioSource>();
+        WeaponBonusAudio = GameObject.Find("Weapon Bonus Sound").GetComponent<AudioSource>();
+        motorSound = GameObject.Find("Motor Audio").GetComponent<AudioSource>();
+        shockWaveSound = GetComponent<AudioSource>();
+    }
+
     protected override void InitializeShip()
     {
         health = 100;
@@ -95,9 +103,18 @@ public class Player : ShipParent
         {
             transform.rotation = Quaternion.Euler(0, 0, 10);
         }
+        else if(verticalInput > 0)
+        {
+            motorSound.pitch = 1.1f;
+        }
+        else if(verticalInput < 0)
+        {
+            motorSound.pitch = 0.9f;
+        }
         else
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            motorSound.pitch = 1.0f;
         }
     }
 
