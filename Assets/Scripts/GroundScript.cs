@@ -13,7 +13,7 @@ public class GroundScript : MonoBehaviour
     {
         if(transform.position.z <= -50)
         {   
-            transform.position = new Vector3(0.0f, 0.0f, 49.9f);
+            transform.position = new Vector3(0.0f, 0.0f, 49.8f);
         }
 
         transform.Translate(Vector3.back * speed * Time.deltaTime);
