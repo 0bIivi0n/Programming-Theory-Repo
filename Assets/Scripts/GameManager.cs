@@ -54,20 +54,23 @@ public class GameManager : MonoBehaviour
         CheckPlayerName();
         UpdateName();
         UpdateBestScore();
-
-        if(player.health <= 0)
-        {
-            health = 0;
-            Debug.Log("Game Over!");
-            isGameActive = false;
-            gameOver.SetActive(true);
-            fireParticle.SetActive(true);
-        }
+        CheckPlayerHealth(); 
         UpdateHealth();
     }
 
 
     // Functions:
+
+    private void CheckPlayerHealth()
+    {
+        if(player.health <= 0)
+        {
+            health = 0;
+            isGameActive = false;
+            gameOver.SetActive(true);
+            fireParticle.SetActive(true);
+        }
+    }
 
     public void UpdateScore(float scoreToAdd)
     {
