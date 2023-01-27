@@ -120,7 +120,7 @@ public class Player : ShipParent
 
     private void FireCanon()
     {
-        if(Input.GetButton("Fire2") && Time.time - canonTimeStamp > fireRate)
+        if(Input.GetButton("Fire1") && Time.time - canonTimeStamp > fireRate)
         {
             canonAudio.SetActive(true);
             Instantiate(projectilePrefab, new Vector3(transform.position.x + 0.22f, transform.position.y + 0.05f, transform.position.z + 1.0f), transform.rotation);
@@ -128,7 +128,7 @@ public class Player : ShipParent
             canonTimeStamp = Time.time;
         }
 
-        if(Input.GetButtonUp("Fire2"))
+        if(Input.GetButtonUp("Fire1"))
         {
             canonAudio.SetActive(false);
         }
@@ -137,7 +137,7 @@ public class Player : ShipParent
 
     private void ResetMissile()
     {
-        if(Input.GetButtonDown("Fire1") && canFire)
+        if(Input.GetButtonDown("Fire2") && canFire)
         {
             StartCoroutine("SpawnMissile");
             canFire = false;
@@ -295,9 +295,9 @@ public class Player : ShipParent
         }
 
         hasShockWaveBonus = false;
-    }
+    } 
 
-    IEnumerator StopShockWave()
+     IEnumerator StopShockWave()
     {
         yield return new WaitForSeconds(2);
         shockWave.SetActive(false);
