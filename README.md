@@ -9,7 +9,7 @@ For this project, I chose to make a top-down shooter in which you control a spit
 
 2/ There are 3 Types of enemies (small, medium, big) with different characteristics //POLYMORPHISM - OK!
 
-3/ No more public variables in code (except a few that are protected with getters and setters) //ENCAPSULATION - Almost done!
+3/ Almost all variables and functions are private or protected. //ENCAPSULATION - OK!
 
 4/ Most of the code is separated in different functions and is easy to read //ABSTRACTION - OK!
 
