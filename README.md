@@ -11,7 +11,7 @@ For this project, I chose to make a top-down shooter in which you control a spit
 
 3/ No more public variables in code (except a few that are protected with getters and setters) //ENCAPSULATION - Almost done!
 
-4/ Most of the code is separated in different functions and is easy to read //ABSTRACTION - Almost done!
+4/ Most of the code is separated in different functions and is easy to read //ABSTRACTION - OK!
 
 
 Looks good enough, now clean your code!
