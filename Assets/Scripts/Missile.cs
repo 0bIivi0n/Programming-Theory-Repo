@@ -36,7 +36,7 @@ public class Missile : MonoBehaviour
         {
             MoveMissile();
 
-            if(Input.GetButtonDown("Fire1") && !isFired)
+            if(Input.GetButtonDown("Fire2") && !isFired)
             {
                 isFired = true;
                 missileAudio.Play();
